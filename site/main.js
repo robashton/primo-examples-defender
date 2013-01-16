@@ -17,6 +17,8 @@ engine.on('init', function() {
         centrey: 0,
         radius: 160
     })
+    engine.input.bind(engine.input.LEFT_ARROW, 'left')
+    engine.input.bind(engine.input.RIGHT_ARROW, 'right')
 
   camera.moveTo(0,0)
   camera.zoomTo(1000)
