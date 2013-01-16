@@ -3,6 +3,7 @@ var engine = Primo.Create('game')
 
 var Planet = require('./entities/planet')
 var Defender = require('./entities/defender')
+var AsteroidSpawner = require('./entities/asteroidspawner')
 
 engine.on('init', function() {
   var scene = engine.scene
@@ -17,6 +18,8 @@ engine.on('init', function() {
         centrey: 0,
         radius: 160
     })
+    , spawner = scene.spawnEntity(AsteroidSpawner)
+
     engine.input.bind(engine.input.LEFT_ARROW, 'left')
     engine.input.bind(engine.input.RIGHT_ARROW, 'right')
 
