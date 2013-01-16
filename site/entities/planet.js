@@ -1,5 +1,5 @@
 var Primo = require('primo')
-var Animation = require('primo/lib/components/animation')
+var Animation = require('primo-animation')
 
 module.exports = Primo.DefineEntity(function(id, data) {
   this.x = data.x - data.radius

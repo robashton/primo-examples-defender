@@ -1,5 +1,5 @@
 var Primo = require('primo')
-var Animation = require('primo/lib/components/animation')
+var Animation = require('primo-animation')
 var _ = require('underscore')
 
 var RotateAroundPoint = function(entity, x, y, radius) {

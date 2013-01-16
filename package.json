@@ -15,6 +15,8 @@
     "underscore": "~1.4.3"
   },
   "devDependencies": {
-    "primo": ""
+    "primo": "",
+    "primo-rigidbody": "",
+    "primo-animation": ""
   }
 }
