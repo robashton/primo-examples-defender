@@ -12,5 +12,8 @@
   "dependencies": {
     "send": "~0.1.0",
     "express": "~3.0.6"
+  },
+  "devDependencies": {
+    "primo": ""
   }
 }
