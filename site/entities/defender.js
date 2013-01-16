@@ -18,7 +18,7 @@ RotateAroundPoint.prototype = {
     var x = this.x + (this.radius) * Math.cos(this.angle)
     var y = this.y + (this.radius) * Math.sin(this.angle)
     this.entity.x = x
-    this.entity.y = y - (entity.height / 2.0)
+    this.entity.y = y
     
     // TODO: Rotate the starting sprite by 90 degrees clock-wise
     // so that we haven't got to do this really dumb patching
@@ -39,5 +39,5 @@ module.exports = Primo.DefineEntity(function(id, data) {
   this.height = 20
   this.attach(new Animation(this, 'media/ship.png', 320, 468))
        .define('idle', 1.0, [0])
-  this.attach(new RotateAroundPoint(data.centrex, data.centrey, data.radius))
+  this.attach(new RotateAroundPoint(this, data.centrex, data.centrey, data.radius))
 })
