@@ -1,0 +1,12 @@
+{
+  "name": "primo-defender",
+  "version": "0.0.0",
+  "description": "Port of the LD48 entry \"tiny defender\" to PrimoJS",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Rob Ashton",
+  "license": "MIT"
+}
