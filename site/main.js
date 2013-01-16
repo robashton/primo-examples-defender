@@ -20,8 +20,9 @@ engine.on('init', function() {
     })
     , spawner = scene.spawnEntity(AsteroidSpawner)
 
-    engine.input.bind(engine.input.LEFT_ARROW, 'left')
-    engine.input.bind(engine.input.RIGHT_ARROW, 'right')
+  engine.input.bind(engine.input.LEFT_ARROW, 'left')
+  engine.input.bind(engine.input.RIGHT_ARROW, 'right')
+  engine.input.bind(engine.input.LEFT_CTRL, 'fire')
 
   camera.moveTo(0,0)
   camera.zoomTo(1000)
