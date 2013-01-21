@@ -12,21 +12,5 @@ module.exports = Primo.DefineEntity(function(id, data) {
     gravity: 1.0,
     bounce: 0.5
   }))
-
-  var asteroid = this
-  this.handle('killbybullet', function() {
-    asteroid.kill()
-    potentiallySpawnPowerupFor(asteroid)
-  })
 })
-
-function potentiallySpawnPowerupFor(asteroid) {
-  if(Math.random() < 0.2) {
-    spawnPowerupFor(asteroid)
-  }
-}
-
-spawnPowerupFor(asteroid) {
-  // Etc
-}
 
