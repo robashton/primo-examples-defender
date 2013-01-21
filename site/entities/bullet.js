@@ -1,6 +1,7 @@
 var Primo = require('primo')
 var GradientCircle = require('../components/gradientcircle')
 var RigidBody = require('primo-rigidbody')
+var Asteroid = require('./asteroid')
 
 module.exports = Primo.DefineEntity(function(id, data) {
   this.width = 5
@@ -11,4 +12,13 @@ module.exports = Primo.DefineEntity(function(id, data) {
     gravity: 0.0,
     bounce: 0.0
   }))
+
+  var self = this
+  this.on('collided', function(other) {
+    if(other instanceof Asteroid) {
+      other.kill()
+      self.kill()
+    }
+  })
 })
+
