@@ -13,11 +13,11 @@ module.exports = Primo.DefineEntity(function(id, data) {
     bounce: 0.0
   }))
 
-  var self = this
+  var bullet = this
   this.on('collided', function(other) {
     if(other instanceof Asteroid) {
-      other.kill()
-      self.kill()
+      other.dispatch('killbybullet')
+      bullet.kill()
     }
   })
 })
