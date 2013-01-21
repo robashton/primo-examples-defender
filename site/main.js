@@ -5,6 +5,7 @@ var Planet = require('./entities/planet')
 var Defender = require('./entities/defender')
 var AsteroidSpawner = require('./entities/asteroidspawner')
 
+
 engine.on('init', function() {
   var scene = engine.scene
     , camera = scene.camera
@@ -20,6 +21,7 @@ engine.on('init', function() {
     })
     , spawner = scene.spawnEntity(AsteroidSpawner)
 
+  engine.cellsize = 100
   engine.input.bind(engine.input.LEFT_ARROW, 'left')
   engine.input.bind(engine.input.RIGHT_ARROW, 'right')
   engine.input.bind(engine.input.LEFT_CTRL, 'fire')

@@ -9,6 +9,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
     .define('idle', 1.0, [0])
   this.attach(new RigidBody(this, {
     weight: 90 - (90 / this.width),
-    gravity: 1.0
+    gravity: 1.0,
+    bounce: 0.5
   }))
 })

@@ -2,7 +2,7 @@ var Primo = require('primo')
 var Asteroid = require('./asteroid')
 
 module.exports = Primo.DefineEntity(function(id, data) {
-  this.spawnTime = 5000
+  this.spawnTime = 1000
   this.speedSeed = 50 
   
   var spawner = this
@@ -12,8 +12,8 @@ module.exports = Primo.DefineEntity(function(id, data) {
       var angle = Math.random() * (Math.PI * 2);
       var xdir = Math.cos(angle);
       var ydir = Math.sin(angle);
-      var x = 1500 * xdir;
-      var y = 1500 * ydir;
+      var x = 500 * xdir;
+      var y = 500 * ydir;
 
       var speed = 30.0 + Math.random() * spawner.speedSeed;
       var accuracy = 0// 2.0 - Math.random() * 4.0;

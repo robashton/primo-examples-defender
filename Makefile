@@ -4,6 +4,6 @@ concat:
 	browserify site/main.js > site/main-built.js
 
 watch:
-	browserify site/main.js -o site/main-built.js --watch --debug
+	browserify site/main.js -o site/main-built.js --debug --watch
 
 
