@@ -6,6 +6,5 @@ module.exports = Primo.DefineEntity(function(id, data) {
   this.y = data.y - data.radius
   this.width = data.radius * 2.0
   this.height = data.radius * 2.0
-  this.attach(new Animation(this, "media/largeplanet.png", 512, 512))
-    .define('idle', 1.0, [0])
+  this.attach(new Animation(this, "media/largeplanet.png"))
 })

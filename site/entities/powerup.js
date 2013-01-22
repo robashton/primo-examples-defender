@@ -4,10 +4,9 @@ var Animation = require('primo-animation')
 
 module.exports = Primo.DefineEntity(function(id, data) {
   var powerup = powerups[Math.floor(Math.random() * powerups.length)]
-  this.width = 10
-  this.height = 10
-  this.attach(new Animation(this, powerup.texture, 128, 128))
-    .define('idle', 1.0, [0])
+  this.width = 50
+  this.height = 50
+  this.attach(new Animation(this, powerup.texture))
   this.on('collided', function(other) {
     if(other instanceof Planet) {
       powerup.invoke.call(this, other)
