@@ -26,12 +26,17 @@ engine.on('init', function() {
     , powerups = scene.spawnEntity(PowerupListener)
 
   engine.cellsize = 100
+  engine.gravity = function(entity, result) {
+    var mag = Math.sqrt(entity.x*entity.x + entity.y*entity.y)
+    result.x = (-entity.x / mag) * 0.5
+    result.y = (-entity.y / mag) * 0.5
+  }
   engine.input.bind(engine.input.LEFT_ARROW, 'left')
   engine.input.bind(engine.input.RIGHT_ARROW, 'right')
   engine.input.bind(engine.input.LEFT_CTRL, 'fire')
 
   camera.moveTo(0,0)
-  camera.zoomTo(1000)
+  camera.zoomTo(2000)
 })
 
 engine.render = function() {

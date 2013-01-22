@@ -6,6 +6,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
   var powerup = powerups[Math.floor(Math.random() * powerups.length)]
   this.width = 50
   this.height = 50
+  this.gravible = true
   this.attach(new Animation(this, powerup.texture))
   this.on('collided', function(other) {
     if(other instanceof Planet) {
