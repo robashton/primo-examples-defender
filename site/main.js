@@ -34,4 +34,13 @@ engine.on('init', function() {
   camera.zoomTo(1000)
 })
 
+engine.render = function() {
+  this.context.globalCompositionOperation = 'source-over';
+  this.context.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+  this.context.globalCompositionOperation = 'lighter';
+  this.scene.render(this.context)
+}
+
+
 engine.start()
