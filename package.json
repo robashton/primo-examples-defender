@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "primo": "",
-    "primo-rigidbody": "",
+    "primo-physics": "",
     "primo-animation": ""
   }
 }

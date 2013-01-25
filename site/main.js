@@ -1,4 +1,5 @@
 var Primo = require('primo')
+var physics = require('primo-physics')
 var engine = Primo.Create('game')
 
 var Planet = require('./entities/planet')
@@ -9,6 +10,8 @@ var PowerupListener = require('./entities/poweruplistener')
 
 
 engine.on('init', function() {
+  physics.init(engine)
+
   var scene = engine.scene
     , camera = scene.camera
     , planet = scene.spawnEntity(Planet, {

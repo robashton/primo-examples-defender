@@ -1,6 +1,6 @@
 var Primo = require('primo')
 var GradientCircle = require('../components/gradientcircle')
-var RigidBody = require('primo-rigidbody')
+var RigidBody = require('primo-physics').RigidBody
 var Asteroid = require('./asteroid')
 
 module.exports = Primo.DefineEntity(function(id, data) {
