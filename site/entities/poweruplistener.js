@@ -4,9 +4,8 @@ var Asteroid = require('./asteroid')
 var Powerup = require('./powerup')
 
 module.exports = Primo.DefineEntity(function(id, data) {
-  this.scene.on('killed', function(data, sender) {
-    if(sender instanceof Asteroid)
-      trySpawnPowerupFor(sender)
+  this.scene.on('asteroid-destroyed', function(asteroid) {
+    trySpawnPowerupFor(asteroid)
   })
 })
 

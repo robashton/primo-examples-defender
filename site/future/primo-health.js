@@ -13,6 +13,8 @@ Health.prototype = {
   damage: function(amount) {
     this.amount -= amount
     this.entity.raise('health-changed', this.amount)
+    if(this.amount <= 0)
+      this.entity.kill()
   },
   increase: function(amount) {
     this.amount += amount

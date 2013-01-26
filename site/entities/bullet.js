@@ -17,6 +17,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
   var bullet = this
   this.on('collided', function(other) {
     if(other instanceof Asteroid) {
+      this.raise('asteroid-destroyed', other)
       other.kill()
       bullet.kill()
     }

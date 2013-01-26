@@ -6,21 +6,11 @@ var AsteroidSpawner = require('./entities/asteroidspawner')
 var ExplosionListener = require('./entities/explosionlistener')
 var PowerupListener = require('./entities/poweruplistener')
 var UI = require('./ui')
+var Menu = require('./future/primo-menu')
 
 var engine = Primo.Create('game')
 
-engine.render = function() {
-  this.context.globalCompositionOperation = 'source-over';
-  this.context.fillStyle = 'rgba(0, 0, 0, 0.1)';
-  this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-  this.context.globalCompositionOperation = 'lighter';
-  this.scene.render(this.context)
-}
-
-engine.on('init', function() {
-  physics.init(engine)
-  UI.init(engine)
-
+function startGame() {
   var scene = engine.scene
     , camera = scene.camera
     , planet = scene.spawnEntity(Planet, {
@@ -49,8 +39,40 @@ engine.on('init', function() {
 
   camera.moveTo(0,0)
   camera.zoomTo(2000)
-})
+}
 
+engine.render = function() {
+  this.context.globalCompositionOperation = 'source-over';
+  this.context.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+  this.context.globalCompositionOperation = 'lighter';
+  this.scene.render(this.context)
+}
+
+var menu = Menu.define(engine)
+
+menu.configure()
+  .font('')
+  .viewport(640, 480)
+  .defineScreen("root", function(screen) {
+    screen
+      .addOption('Play', startGame, true)
+      .addOption('Instructions', 'instructions')
+  })
+  .defineScreen("instructions", function(screen) {
+    screen
+      .addOption("Back", "root")
+      .displayText(0, 0,  "You are defending the world, go you")
+      .displayText(0, 20, "Use the arrow keys to move the defender")
+      .displayText(0, 30, "Use the ctrl key to fire")
+      .displayText(0, 40, "Mind you don't run out of energy though!")
+  })
+
+engine.on('init', function() {
+  physics.init(engine)
+  UI.init(engine)
+  menu.show()
+})
 
 
 engine.start()
