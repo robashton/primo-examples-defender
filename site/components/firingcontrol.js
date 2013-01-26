@@ -15,6 +15,7 @@ var FiringControl = function(entity) {
 
 FiringControl.prototype = {
   tick: function() {
+    this.regen()
     this.updateFiringTicks()
     if(this.energy >= this.consumption && this.game.input.active('fire')) 
       this.tryFire()
@@ -41,12 +42,14 @@ FiringControl.prototype = {
     this.energy += amount
     this.entity.raise('energy-changed', this.energy)
   },
+  regen: function() {
+    if(this.energy < this.maxEnergy)
+      this.modifyEnergy(1)
+  },
   updateFiringTicks: function() {
     if(this.firingTicks === 0) return
     if(++this.firingTicks === this.firingRate)
       this.firingTicks = 0
-    if(this.energy < this.maxEnergy)
-      this.modifyEnergy(1)
   }
 }
 

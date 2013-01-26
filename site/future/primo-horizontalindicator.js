@@ -7,7 +7,7 @@ var HorizontalIndicator = function(game, data) {
   this.bottom = util.valueOrDefault(data.bottom, 0)
   this.height = util.valueOrDefault(data.height, 5)
   this.colour = util.valueOrDefault(data.colour, '#FFF')
-  this.length = 100
+  this.length = 1
 }
 
 HorizontalIndicator.prototype = {
@@ -21,7 +21,7 @@ HorizontalIndicator.prototype = {
 
     var x = this.left * width
       , y = canvas.height - (this.bottom + this.height) * height
-      , width = canvas.width - (x + this.right*width)
+      , width = (canvas.width - (x + this.right*width)) * this.length
       , height = height * this.height
 
     context.fillStyle = this.colour

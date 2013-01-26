@@ -17,7 +17,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
 
   this.on('collided', function(other) {
      if(other instanceof Planet) {
-       other.dispatch('damage', this)
+       other.dispatch('damage', 10)
        this.kill()
      }
   })

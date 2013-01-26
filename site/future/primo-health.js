@@ -15,7 +15,7 @@ Health.prototype = {
   },
   damage: function(amount) {
     this.amount -= amount
-    this.raise('health-changed', this.amount)
+    this.entity.raise('health-changed', this.amount)
   }
 }
 
