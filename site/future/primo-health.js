@@ -10,9 +10,6 @@ var Health = function(entity, data) {
 }
 
 Health.prototype = {
-  tick: function() {
-    // TODO: Regen
-  },
   damage: function(amount) {
     this.amount -= amount
     this.entity.raise('health-changed', this.amount)
