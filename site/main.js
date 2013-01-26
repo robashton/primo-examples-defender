@@ -1,16 +1,25 @@
 var Primo = require('primo')
 var physics = require('primo-physics')
-var engine = Primo.Create('game')
-
 var Planet = require('./entities/planet')
 var Defender = require('./entities/defender')
 var AsteroidSpawner = require('./entities/asteroidspawner')
 var ExplosionListener = require('./entities/explosionlistener')
 var PowerupListener = require('./entities/poweruplistener')
+var UI = require('./ui')
 
+var engine = Primo.Create('game')
+
+engine.render = function() {
+  this.context.globalCompositionOperation = 'source-over';
+  this.context.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+  this.context.globalCompositionOperation = 'lighter';
+  this.scene.render(this.context)
+}
 
 engine.on('init', function() {
   physics.init(engine)
+  UI.init(engine)
 
   var scene = engine.scene
     , camera = scene.camera
@@ -42,13 +51,6 @@ engine.on('init', function() {
   camera.zoomTo(1000)
 })
 
-engine.render = function() {
-  this.context.globalCompositionOperation = 'source-over';
-  this.context.fillStyle = 'rgba(0, 0, 0, 0.1)';
-  this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-  this.context.globalCompositionOperation = 'lighter';
-  this.scene.render(this.context)
-}
 
 
 engine.start()

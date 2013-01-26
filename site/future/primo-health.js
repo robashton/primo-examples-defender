@@ -1,0 +1,22 @@
+var util = require('primo-utils')
+var _ = require('underscore')
+
+var Health = function(entity, data) {
+  this.max = 100
+  this.amount = 100
+  this.entity = entity
+  this.entity.health = this
+  this.entity.handle('damage', _.bind(this.damage, this))
+}
+
+Health.prototype = {
+  tick: function() {
+    // TODO: Regen
+  },
+  damage: function(amount) {
+    this.amount -= amount
+    this.raise('health-changed', this.amount)
+  }
+}
+
+module.exports = Health
