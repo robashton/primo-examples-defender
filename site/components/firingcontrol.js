@@ -40,6 +40,9 @@ FiringControl.prototype = {
   },
   modifyEnergy: function(amount) {
     this.energy += amount
+    if(this.energy > this.maxEnergy)
+      this.energy = this.maxEnergy
+    if(this.energy < 0) this.energy - 0
     this.entity.raise('energy-changed', this.energy)
   },
   regen: function() {

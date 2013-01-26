@@ -47,5 +47,12 @@ function initializeEnergyBar(game) {
       , percentage = currentEnergy / maxEnergy
     energyBar.updateLength(percentage)
   })
+
+  scene.on('infinite-energy-activated', function() {
+    energyBar.colour = '#00F'
+  })
+  scene.on('infinite-energy-deactivated', function() {
+    energyBar.colour = '#FF0'
+  })
   return energyBar
 }

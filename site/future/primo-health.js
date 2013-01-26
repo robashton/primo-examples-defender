@@ -16,7 +16,14 @@ Health.prototype = {
   damage: function(amount) {
     this.amount -= amount
     this.entity.raise('health-changed', this.amount)
+  },
+  increase: function(amount) {
+    this.amount += amount
+    if(this.amount > this.max)
+      this.amount = this.max
+    this.entity.raise('health-changed', this.amount)
   }
+
 }
 
 module.exports = Health

@@ -5,6 +5,7 @@ var FiringControl = require('../components/firingcontrol')
 var _ = require('underscore')
 
 module.exports = Primo.DefineEntity(function(id, data) {
+  this.id = 'defender'
   this.width = 20
   this.height = 10
   this.attach(new Animation(this, 'media/ship.png'))
