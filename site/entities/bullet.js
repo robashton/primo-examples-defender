@@ -9,7 +9,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
   this.attach(new GradientCircle(this, '#FFF', '#0F0', '#000'))
 
   this.attach(new RigidBody(this, {
-    weight: Infinity,
+    solid: false,
     gravity: 0.0,
     bounce: 0.0
   }))

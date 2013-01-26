@@ -16,7 +16,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
       var y = 1500 * ydir;
 
       var speed = 30.0 + Math.random() * spawner.speedSeed;
-      var accuracy = 2.0 - Math.random() * 4.0;
+      var accuracy = 0.5 - Math.random()
       var xvel = speed * ((-xdir) + accuracy);
       var yvel = speed * ((-ydir) - accuracy);
 
