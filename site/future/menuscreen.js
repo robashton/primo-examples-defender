@@ -24,6 +24,9 @@ MenuScreen.prototype = {
     if(index < 0) index = 0
     this.selectIndex(index)
   },
+  getCurrentOption: function() {
+    return this.selectedOption.action
+  },
   render: function(context) {
     var i 
     for(i = 0 ; i < this.artifacts.length; i++)

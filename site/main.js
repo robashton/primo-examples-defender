@@ -11,6 +11,8 @@ var Menu = require('./future/primo-menu')
 var engine = Primo.Create('game')
 
 function startGame() {
+  UI.init(engine)
+  menu.hide()
   var scene = engine.scene
     , camera = scene.camera
     , planet = scene.spawnEntity(Planet, {
@@ -41,26 +43,25 @@ function startGame() {
   camera.zoomTo(2000)
 }
 
-/*
 engine.render = function() {
   this.context.globalCompositionOperation = 'source-over';
   this.context.fillStyle = 'rgba(0, 0, 0, 0.1)';
   this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
   this.context.globalCompositionOperation = 'lighter';
   this.scene.render(this.context)
+  this.raise('render', this.context)
 }
-*/
 
 var menu = Menu.define(engine)
 
 menu.configure()
   .font('50px sans-serif')
-  .defaultColour('#000')
+  .defaultColour('#FFF')
   .viewport(640, 480)
   .defineScreen("root", function(screen) {
     screen
       .displayText('Tiny Defender', 100, 140, '32px comic-sans', '#555')
-      .addOption('Play', 100, 200, startGame, true)
+      .addOption('Play', 100, 200, startGame)
       .addOption('Instructions', 100, 260, 'instructions')
   })
   .defineScreen("instructions", function(screen) {
@@ -74,9 +75,7 @@ menu.configure()
 
 engine.on('init', function() {
   physics.init(engine)
-  UI.init(engine)
   menu.show('root')
 })
-
 
 engine.start()

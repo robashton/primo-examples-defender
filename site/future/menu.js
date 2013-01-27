@@ -18,8 +18,7 @@ Menu.prototype = {
     return new MenuConfiguration(this)
   },
   show: function(screenid) {
-    this.activeScreen = this.screens[screenid]
-    this.activeScreen.selectIndex(0)
+    this.setActiveScreen(screenid)
     this.engine.on('render', this.render)
     this.engine.input.on('keydown', this.onKeyDown)
     return this
@@ -28,11 +27,23 @@ Menu.prototype = {
     this.engine.off('render', this.render)
     this.engine.input.off('keydown', this.onKeyDown)
   },
+  setActiveScreen: function(screenid) {
+    this.activeScreen = this.screens[screenid]
+    this.activeScreen.selectIndex(0)
+  },
   onKeyDown: function(key) {
     if(key === this.engine.input.UP_ARROW)
       this.activeScreen.decreaseIndex()
     else if(key === this.engine.input.DOWN_ARROW)
       this.activeScreen.increaseIndex()
+    else if(key === this.engine.input.RETURN)
+      this.executeCurrentOption(this.activeScreen.getCurrentOption())
+  },
+  executeCurrentOption: function(option) {
+    if(_.isFunction(option)) 
+      option()
+    else if(_.isString(option))
+      this.setActiveScreen(option)
   },
   render: function(context) {
     context.save()
