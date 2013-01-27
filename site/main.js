@@ -59,23 +59,23 @@ menu.configure()
   .viewport(640, 480)
   .defineScreen("root", function(screen) {
     screen
-      .displayText(100,140, 'Tiny Defender', '32px comic-sans', '#555')
-      .addOption(100, 200, 'Play', startGame, true)
-      .addOption(100, 260, 'Instructions', 'instructions')
+      .displayText('Tiny Defender', 100, 140, '32px comic-sans', '#555')
+      .addOption('Play', 100, 200, startGame, true)
+      .addOption('Instructions', 100, 260, 'instructions')
   })
   .defineScreen("instructions", function(screen) {
     screen
-      .addOption(0, 100, "Back", "root")
-      .displayText(0, 0,  "You are defending the world, go you")
-      .displayText(0, 20, "Use the arrow keys to move the defender")
-      .displayText(0, 30, "Use the ctrl key to fire")
-      .displayText(0, 40, "Mind you don't run out of energy though!")
+      .addOption("Back", 100, 260, "root")
+      .displayText("You are defending the world, go you", 50, 50, '16px sans-serif')
+      .displayText("Use the arrow keys to move the defender", 50, 70, '16px sans-serif')
+      .displayText("Use the ctrl key to fire", 50, 90, '16px sans-serif')
+      .displayText("Mind you don't run out of energy though!", 50, 110, '16px sans-serif')
   })
 
 engine.on('init', function() {
   physics.init(engine)
   UI.init(engine)
-  menu.show('root')
+  menu.show('instructions')
 })
 
 

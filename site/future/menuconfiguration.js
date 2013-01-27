@@ -32,7 +32,7 @@ var ScreenConfiguration = function(screen) {
 }
 
 ScreenConfiguration.prototype = {
-  addOption: function(x, y, text, action) {
+  addOption: function(text, x, y, action) {
     this.screen.options.push({
       text: text,
       x: x,
@@ -41,7 +41,7 @@ ScreenConfiguration.prototype = {
     })
     return this
   },
-  displayText: function(x,y, text, font, colour) {
+  displayText: function(text, x, y, font, colour) {
     this.screen.artifacts.push({
       type: "text",
       text: text,
