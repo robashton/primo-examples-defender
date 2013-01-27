@@ -17,4 +17,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
     bounce: 0,
     type: "circle"
   }))
+  this.on('killed', function() {
+    this.raise('player-died')
+  })
 })
