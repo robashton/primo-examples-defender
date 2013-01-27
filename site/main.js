@@ -75,7 +75,7 @@ menu.configure()
 engine.on('init', function() {
   physics.init(engine)
   UI.init(engine)
-  menu.show('instructions')
+  menu.show('root')
 })
 
 

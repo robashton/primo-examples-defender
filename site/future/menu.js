@@ -10,6 +10,7 @@ var Menu = function(engine) {
   this.width = 100
   this.height = 100
   this.render = _.bind(this.render, this)
+  this.onKeyDown = _.bind(this.onKeyDown, this)
 }
 
 Menu.prototype = {
@@ -18,11 +19,20 @@ Menu.prototype = {
   },
   show: function(screenid) {
     this.activeScreen = this.screens[screenid]
+    this.activeScreen.selectIndex(0)
     this.engine.on('render', this.render)
+    this.engine.input.on('keydown', this.onKeyDown)
     return this
   },
   hide: function() {
     this.engine.off('render', this.render)
+    this.engine.input.off('keydown', this.onKeyDown)
+  },
+  onKeyDown: function(key) {
+    if(key === this.engine.input.UP_ARROW)
+      this.activeScreen.decreaseIndex()
+    else if(key === this.engine.input.DOWN_ARROW)
+      this.activeScreen.increaseIndex()
   },
   render: function(context) {
     context.save()
