@@ -41,6 +41,7 @@ function startGame() {
   camera.zoomTo(2000)
 }
 
+/*
 engine.render = function() {
   this.context.globalCompositionOperation = 'source-over';
   this.context.fillStyle = 'rgba(0, 0, 0, 0.1)';
@@ -48,20 +49,23 @@ engine.render = function() {
   this.context.globalCompositionOperation = 'lighter';
   this.scene.render(this.context)
 }
+*/
 
 var menu = Menu.define(engine)
 
 menu.configure()
-  .font('')
+  .font('50px sans-serif')
+  .defaultColour('#000')
   .viewport(640, 480)
   .defineScreen("root", function(screen) {
     screen
-      .addOption('Play', startGame, true)
-      .addOption('Instructions', 'instructions')
+      .displayText(100,140, 'Tiny Defender', '32px comic-sans', '#555')
+      .addOption(100, 200, 'Play', startGame, true)
+      .addOption(100, 260, 'Instructions', 'instructions')
   })
   .defineScreen("instructions", function(screen) {
     screen
-      .addOption("Back", "root")
+      .addOption(0, 100, "Back", "root")
       .displayText(0, 0,  "You are defending the world, go you")
       .displayText(0, 20, "Use the arrow keys to move the defender")
       .displayText(0, 30, "Use the ctrl key to fire")
@@ -71,7 +75,7 @@ menu.configure()
 engine.on('init', function() {
   physics.init(engine)
   UI.init(engine)
-  menu.show()
+  menu.show('root')
 })
 
 

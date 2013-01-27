@@ -9,13 +9,17 @@ MenuConfiguration.prototype = {
     this.menu.font = fontstr
     return this
   },
+  defaultColour: function(colour) {
+    this.menu.defaultColour = colour
+    return this
+  },
   viewport: function(width, height) {
     this.menu.width = width
     this.menu.height = height
     return this
   },
   defineScreen: function(name, cb) {
-    var screen = new MenuScreen()
+    var screen = new MenuScreen(this.menu)
     this.menu.screens[name] = screen
     var configuration = new ScreenConfiguration(screen)
     cb.call(configuration, configuration)
@@ -28,9 +32,11 @@ var ScreenConfiguration = function(screen) {
 }
 
 ScreenConfiguration.prototype = {
-  addOption: function(text, action) {
+  addOption: function(x, y, text, action) {
     this.screen.options.push({
       text: text,
+      x: x,
+      y: y,
       action: action
     })
     return this

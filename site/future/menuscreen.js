@@ -1,23 +1,27 @@
-var MenuScreen = function() {
+var util = require('primo-utils')
+
+var MenuScreen = function(menu) {
   this.options = []
   this.artifacts = []
+  this.menu = menu
 }
 
 MenuScreen.prototype = {
   render: function(context) {
-    for(var i = 0 ; i < this.artifacts.length; i++)
+    var i 
+    for(i = 0 ; i < this.artifacts.length; i++)
       this.renderArtifact(context, this.artifacts[i])
-    for(var i = 0 ; i < this.options.length; i++) 
-      this.renderOption(this.options[i])
+    for(i = 0 ; i < this.options.length; i++) 
+      this.renderOption(context, this.options[i])
   },
   renderArtifact: function(context, artifact) {
-    context.fillStyle = artifact.colour
-    context.font = artifact.font
+    context.fillStyle = util.valueOrDefault(artifact.colour, this.menu.defaultColour)
+    context.font = util.valueOrDefault(artifact.font, this.menu.font)
     context.fillText(artifact.text, artifact.x, artifact.y)
   },
   renderOption: function(context, option) {
-    context.fillStyle = option.colour
-    context.font = option.font
+    context.fillStyle = util.valueOrDefault(option.colour, this.menu.defaultColour)
+    context.font = util.valueOrDefault(option.font, this.menu.font)
     context.fillText(option.text, option.x, option.y)
     if(option.selected) {
 
