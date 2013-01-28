@@ -1,9 +1,9 @@
-var UI = require('./ui')
 var Planet = require('./entities/planet')
 var Defender = require('./entities/defender')
 var AsteroidSpawner = require('./entities/asteroidspawner')
 var ExplosionListener = require('./entities/explosionlistener')
 var PowerupListener = require('./entities/poweruplistener')
+var Hud = require('./entities/hud')
 var Eventable = require('primo-events')
 var _ = require('underscore')
 
@@ -19,7 +19,6 @@ var TinyDefender = function(engine) {
 TinyDefender.prototype = {
   start: function() {
     var engine = this.engine
-    UI.init(engine)
     var scene = engine.scene
       , camera = scene.camera
       , planet = scene.spawnEntity(Planet, {
@@ -35,15 +34,19 @@ TinyDefender.prototype = {
       , spawner = scene.spawnEntity(AsteroidSpawner)
       , explosions = scene.spawnEntity(ExplosionListener)
       , powerups = scene.spawnEntity(PowerupListener)
+      , hud = scene.spawnEntity(Hud)
 
     engine.cellsize = 100
     camera.moveTo(0,0)
     camera.zoomTo(2000)
+    engine.ui.show()
     scene.on('player-died', this.onPlayerDied, this)
   },
   onPlayerDied: function() {
     var game = this
     setTimeout(function() {
+      game.engine.ui.clear()
+      game.engine.ui.hide()
       game.raise('game-over')
       game.engine.reset()
     }, 2000)

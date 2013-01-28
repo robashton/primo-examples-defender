@@ -1,8 +1,9 @@
 var Primo = require('primo')
 var physics = require('primo-physics')
 var Menu = require('primo-menu')
-var TinyDefender = require('./game')
+var ui = require('primo-ui')
 
+var TinyDefender = require('./game')
 var engine = Primo.Create('game')
 
 var menu = Menu.define(engine)
@@ -41,6 +42,7 @@ menu.configure()
 
 engine.on('init', function() {
   physics.init(engine)
+  ui.init(engine, { width: 640, height: 480 })
   menu.show('root')
 })
 
