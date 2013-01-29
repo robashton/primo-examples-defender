@@ -12,16 +12,16 @@
   "dependencies": {
     "send": "~0.1.0",
     "express": "~3.0.6",
-    "underscore": "~1.4.3",
-    "primo-menu": "~0.1.0"
+    "underscore": "~1.4.3"
   },
   "devDependencies": {
     "primo": "",
     "primo-physics": "",
     "primo-animation": "",
-    "primo-events": "~1.0.2",
-    "primo-utils": "0.0.0",
-    "primo-menu": "0.0.0",
-    "primo-ui": "0.0.1"
+    "primo-events": "",
+    "primo-utils": "",
+    "primo-menu": "",
+    "primo-ui": "",
+    "primo-menu": ""
   }
 }

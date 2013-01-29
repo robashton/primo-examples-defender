@@ -4,6 +4,7 @@ var RigidBody = require('primo-physics').RigidBody
 
 var Planet = require('./planet')
 var DestructionField = require('./destructionfield')
+var EnergyFeeder = require('./energyfeeder')
 
 module.exports = Primo.DefineEntity(function(id, data) {
   var powerup = powerups[Math.floor(Math.random() * powerups.length)]
@@ -17,30 +18,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
   this.on('collided', function(other) {
     if(other instanceof Planet) {
       powerup.invoke.call(this)
-    }
-  })
-  this.energyFeeder = this.attach({
-    active: false,
-    scene: this.scene,
-    entity: this,
-    ticksRemaining: 0,
-    tick: function() {
-      if(this.active) {
-        var defender = this.scene.findEntityById('defender')
-        defender.firingControl.modifyEnergy(10)
-        if(--this.ticksRemaining === 0)
-          this.deactivate()
-      }
-    },
-    activate: function() {
-      this.entity.raise('infinite-energy-activated')
-      this.ticksRemaining = 90
-      this.active = true
-    },
-    deactivate: function() {
-      this.entity.raise('infinite-energy-deactivated')
-      this.active = false
-      this.entity.kill()
+      this.kill()
     }
   })
 })
@@ -52,7 +30,6 @@ var powerups = [
     invoke: function() {
       var defender = this.scene.findEntityById('defender')
       defender.firingControl.modifyEnergy(20)
-      this.kill()
     }
   },
   {
@@ -61,7 +38,6 @@ var powerups = [
     invoke: function() {
       var planet = this.scene.findEntityById('planet')
       planet.health.increase(20)
-      this.kill()
     }
   },
   {
@@ -73,14 +49,13 @@ var powerups = [
         x: planet.x + planet.width/2,
         y: planet.y + planet.height/2
       })
-      this.kill()
     }
   },
   {
     name: "infinite-energy",
     texture: 'media/infinite.png',
     invoke: function() {
-      this.energyFeeder.activate()
+      this.scene.spawnEntity(EnergyFeeder)
     }
   }
 ]
