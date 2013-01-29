@@ -16,6 +16,14 @@ module.exports = Primo.DefineEntity(function(id, data) {
     width: 620,
     colour: '#FF0'
   }))
+  var score = this.game.ui.add(new ui.Label({
+    x: 10,
+    y: 10,
+    height: 18,
+    font: 'sans-serif',
+    colour: '#FFF',
+    text: 'Score: 0'
+  }))
 
   this.scene.on('health-changed', function(current, planet) {
     var max = planet.health.max
@@ -32,5 +40,8 @@ module.exports = Primo.DefineEntity(function(id, data) {
   })
   this.scene.on('infinite-energy-deactivated', function() {
     energy.colour = '#FF0'
+  })
+  this.scene.on('score-changed', function(current) {
+    score.text = current
   })
 })

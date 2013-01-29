@@ -40,7 +40,7 @@ function configureMenu(config) {
       screen
         .displayText('Tiny Defender', 100, 140, '32px comic-sans', '#555')
         .addOption('Play', 100, 200, function() {
-           menu.hide()
+           engine.menu.hide()
            game.start()
         })
         .addOption('Instructions', 100, 260, 'instructions')
@@ -58,8 +58,8 @@ function configureMenu(config) {
        .displayText("Game over", 50, 50, '50px sans-serif', '#F00')
        .displayText("Thanks for playing", 50, 110, '16px sans-serif', '#FF0')
        .addOption('Play again', 100, 200, function() {
+         engine.menu.hide()
          game.start()
-         menu.hide()
       })
    })
  }
