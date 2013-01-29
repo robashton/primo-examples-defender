@@ -12,6 +12,7 @@ var Health = function(entity, data) {
 Health.prototype = {
   damage: function(amount) {
     this.amount -= amount
+    this.entity.raise('damaged', this.amount)
     this.entity.raise('health-changed', this.amount)
     if(this.amount <= 0)
       this.entity.kill()
@@ -20,6 +21,7 @@ Health.prototype = {
     this.amount += amount
     if(this.amount > this.max)
       this.amount = this.max
+    this.entity.raise('regenned', this.amount)
     this.entity.raise('health-changed', this.amount)
   }
 

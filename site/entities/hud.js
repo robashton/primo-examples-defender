@@ -42,6 +42,6 @@ module.exports = Primo.DefineEntity(function(id, data) {
     energy.colour = '#FF0'
   })
   this.scene.on('score-changed', function(current) {
-    score.text = current
+    score.text = 'Score: ' + current
   })
 })
