@@ -2,7 +2,7 @@ var Primo = require('primo')
 
 module.exports = Primo.DefineEntity(function(id, data) {
   var active = false
-    , ticksRemaining = 90
+    , ticksRemaining = 120
 
   this.on('tick', function() {
     if(!active) {
