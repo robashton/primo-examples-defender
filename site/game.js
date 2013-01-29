@@ -41,14 +41,12 @@ TinyDefender.prototype = {
     engine.cellsize = 100
     camera.moveTo(0,0)
     camera.zoomTo(2000)
-    engine.ui.show()
     scene.on('player-died', this.onPlayerDied, this)
   },
   onPlayerDied: function() {
     var game = this
     setTimeout(function() {
       game.engine.ui.clear()
-      game.engine.ui.hide()
       game.raise('game-over')
       game.engine.reset()
     }, 2000)
