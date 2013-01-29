@@ -17,7 +17,7 @@ engine.on('init', function() {
 })
 
 game.on('game-over', function() {
-  menu.show('gameover')
+  engine.menu.show('gameover')
 })
 
 engine.render = function() {
