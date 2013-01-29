@@ -2,23 +2,12 @@ var Primo = require('primo')
 var physics = require('primo-physics')
 var menu = require('primo-menu')
 var ui = require('primo-ui')
-
 var TinyDefender = require('./game')
 
 var engine = Primo.Create('game')
 var game = new TinyDefender(engine)
 
-
-engine.on('init', function() {
-  physics.init(engine)
-  ui.init(engine, { width: 640, height: 480 })
-  menu.init(engine, configureMenu)
-  engine.menu.show('root')
-})
-
-game.on('game-over', function() {
-  engine.menu.show('gameover')
-})
+game.on('game-over', showGameover)
 
 engine.render = function() {
   this.context.globalCompositionOperation = 'source-over';
@@ -29,38 +18,104 @@ engine.render = function() {
   this.raise('render', this.context)
 }
 
+engine.on('init', function() {
+  physics.init(engine)
+  ui.init(engine, { width: 640, height: 480 })
+  menu.init(engine)
+  showMenu()
+})
+
 engine.start()
 
-function configureMenu(config) {
-  config
-    .font('50px sans-serif')
-    .defaultColour('#FFF')
-    .viewport(640, 480)
-    .defineScreen("root", function(screen) {
-      screen
-        .displayText('Tiny Defender', 100, 140, '32px comic-sans', '#555')
-        .addOption('Play', 100, 200, function() {
-           engine.menu.hide()
-           game.start()
-        })
-        .addOption('Instructions', 100, 260, 'instructions')
-    })
-    .defineScreen("instructions", function(screen) {
-      screen
-        .addOption("Back", 100, 260, "root")
-        .displayText("You are defending the world, go you", 50, 50, '16px sans-serif')
-        .displayText("Use the arrow keys to move the defender", 50, 70, '16px sans-serif')
-        .displayText("Use the ctrl key to fire", 50, 90, '16px sans-serif')
-        .displayText("Mind you don't run out of energy though!", 50, 110, '16px sans-serif')
-    })
-   .defineScreen('gameover', function(screen) {
-      screen
-       .displayText("Game over", 50, 50, '50px sans-serif', '#F00')
-       .displayText("Thanks for playing", 50, 110, '16px sans-serif', '#FF0')
-       .addOption('Play again', 100, 200, function() {
-         engine.menu.hide()
-         game.start()
-      })
-   })
- }
+function startGame() {
+  engine.menu.hide()
+  game.start()
+}
+
+function showMenu() {
+  engine.menu.show(engine.ui)
+    .addOption(new ui.Label({
+      text: "Play",
+      x: 100,
+      y: 140,
+      height: 32,
+      font: 'comic sans',
+      colour: '#555'
+    }), startGame)
+    .addOption(new ui.Label({
+      text: "Instructions",
+      x: 100,
+      y: 260,
+      height: 32,
+      font: 'comic sans',
+      colour: '#555'
+    }), showInstructions)
+}
+
+function showInstructions() {
+  engine.menu.show(engine.ui)
+    .addOption(new ui.Label({
+      text: "Back",
+      x: 100,
+      y: 260,
+      font: 'comic sans',
+      colour: '#555'
+  }), showMenu)
+  .addDisplay(new ui.Label({
+      text: "You are defending the world, go you",
+      x: 50,
+      y: 50,
+      height: 16,
+      font: 'sans-serif'
+  }))
+  .addDisplay(new ui.Label({
+      text: "Use the arrow keys to move the defender",
+      x: 50,
+      y: 70,
+      height: 16,
+      font: 'sans-serif'
+  }))
+  .addDisplay(new ui.Label({
+      text: "Use the ctrl key to fire",
+      x: 50,
+      y: 90,
+      height: 16,
+      font: 'sans-serif'
+  }))
+  .addDisplay(new ui.Label({
+      text: "Mind you don't run out of energy though!",
+      x: 50,
+      y: 110,
+      height: 16,
+      font: 'sans-serif'
+  }))
+}
+
+function showGameover() {
+  engine.menu.show(engine.ui)
+    .addOption(new ui.Label({
+      text: "Play again",
+      x: 100,
+      y: 200,
+      height: 16,
+      font: 'sans-serif',
+      colour: '#F00'
+    }), startGame)
+    .addDisplay(new ui.Label({
+      text: "Game over",
+      x: 50,
+      y: 50,
+      height: 50,
+      font: 'sans-serif',
+      colour: '#F00'
+    }))
+    .addDisplay(new ui.Label({
+      text: "Thanks for playing",
+      x: 50,
+      y: 110,
+      height: 16,
+      font: 'sans-serif',
+      colour: '#FF0'
+    }))
+}
 
