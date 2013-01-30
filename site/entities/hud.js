@@ -26,7 +26,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
   }))
   var level = this.game.ui.add(new ui.Label({
     x: 320,
-    y: 220,
+    y: 160,
     align: "center",
     height: 50,
     font: 'comic sans',
