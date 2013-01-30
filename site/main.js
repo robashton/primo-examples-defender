@@ -5,6 +5,7 @@ var PrimoUi = require('primo-ui')
 
 var TinyDefender = require('./game')
 var TinyDefenderMenu = require('./menu')
+var TinyDefenderVariables = require('./variables')
 
 var engine = Primo.Create('game')
 var game = new TinyDefender(engine)
@@ -18,6 +19,7 @@ engine.on('init', function() {
   PrimoPhysics.init(engine)
   PrimoUi.init(engine, { width: 640, height: 480 })
   PrimoMenu.init(engine)
+  TinyDefenderVariables.init(engine)
   menu.index()
 })
 engine.start()

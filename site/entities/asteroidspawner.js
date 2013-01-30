@@ -2,11 +2,9 @@ var Primo = require('primo')
 var Asteroid = require('./asteroid')
 
 module.exports = Primo.DefineEntity(function(id, data) {
-  this.spawnTime = 500
-  this.speedSeed = 50 
-  
   var spawner = this
     , game = spawner.game
+    , variables = game.variables
     , scene = game.scene
 
   function spawnNextAsteroid() {
@@ -16,7 +14,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
       var x = 1500 * xdir;
       var y = 1500 * ydir;
 
-      var speed = 30.0 + Math.random() * spawner.speedSeed;
+      var speed = 30.0 + Math.random() * variables.speedSeed;
       var accuracy = 0.5 - Math.random()
       var xvel = speed * ((-xdir) + accuracy);
       var yvel = speed * ((-ydir) - accuracy);
@@ -27,7 +25,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
         velx: xvel,
         vely: yvel
       })
-      game.scheduleEvent(spawnNextAsteroid, spawner.spawnTime)
+      game.scheduleEvent(spawnNextAsteroid, variables.spawnTime)
   }
   spawnNextAsteroid()
 })

@@ -24,6 +24,16 @@ module.exports = Primo.DefineEntity(function(id, data) {
     colour: '#FFF',
     text: 'Score: 0'
   }))
+  var level = this.game.ui.add(new ui.Label({
+    x: 320,
+    y: 220,
+    align: "center",
+    height: 50,
+    font: 'comic sans',
+    colour: 'FFF',
+    text: 'Level 0'
+  }))
+  level.hide()
 
   this.scene.on('health-changed', function(current, planet) {
     var max = planet.health.max
@@ -44,4 +54,14 @@ module.exports = Primo.DefineEntity(function(id, data) {
   this.scene.on('score-changed', function(current) {
     score.text = 'Score: ' + current
   })
+
+  this.scene.on('level-changed', function(current) {
+    level.text = "Level " + current
+    level.show()
+    this.game.scheduleEvent(hideLevel, 2000)
+  })
+
+  function hideLevel() {
+    level.hide()
+  }
 })

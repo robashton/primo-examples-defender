@@ -11,16 +11,22 @@ var _ = require('underscore')
 var TinyDefender = function(engine) {
   Eventable.call(this)
   this.engine = engine
+  this.scene = engine.scene
   this.engine.input.bind(engine.input.LEFT_ARROW, 'left')
   this.engine.input.bind(engine.input.RIGHT_ARROW, 'right')
   this.engine.input.bind(engine.input.LEFT_CTRL, 'fire')
   this.engine.gravity = this.gravity 
+  this.level = 0
+  this.asteroidsDestroyed = 0
 }
 
 TinyDefender.prototype = {
   start: function() {
+    this.level = 0
+    this.asteroidsDestroyed = 0
+
     var engine = this.engine
-    var scene = engine.scene
+      , scene = engine.scene
       , camera = scene.camera
       , planet = scene.spawnEntity(Planet, {
           x: 0,
@@ -42,6 +48,17 @@ TinyDefender.prototype = {
     camera.moveTo(0,0)
     camera.zoomTo(2000)
     scene.on('player-died', this.onPlayerDied, this)
+    scene.on('asteroid-destroyed', this.onAsteroidDestroyed, this)
+    this.changeLevel(1)
+  },
+  changeLevel: function(level) {
+    this.level = level
+    this.scene.raise('level-changed', level)
+  },
+  onAsteroidDestroyed: function() {
+    this.asteroidsDestroyed++
+    if(this.asteroidsDestroyed % 5 === 0)
+      this.changeLevel(this.level+1)
   },
   onPlayerDied: function() {
     var game = this
