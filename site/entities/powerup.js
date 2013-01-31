@@ -35,7 +35,7 @@ var powerups = [
     texture: 'media/star.png',
     invoke: function() {
       var defender = this.scene.findEntityById('defender')
-      defender.firingControl.modifyEnergy(20)
+      defender.firingControl.modifyEnergy(100)
     }
   },
   {
@@ -43,7 +43,7 @@ var powerups = [
     texture: 'media/heart.png',
     invoke: function() {
       var planet = this.scene.findEntityById('planet')
-      planet.health.increase(20)
+      planet.health.increase(50)
     }
   },
   {

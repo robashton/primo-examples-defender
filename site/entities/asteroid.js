@@ -1,6 +1,8 @@
 var Primo = require('primo')
 var Animation = require('primo-animation')
 var RigidBody = require('primo-physics').RigidBody
+var TimedRemoval = require('../components/timedremoval')
+
 
 var Planet = require('./planet')
 
@@ -9,6 +11,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
   this.height = this.width
   this.gravible = true
   this.attach(new Animation(this, 'media/asteroid.png'))
+  this.attach(new TimedRemoval(this, 60))
   this.attach(new RigidBody(this, {
     weight: 90 - (90 / this.width),
     bounce: 0.5,
