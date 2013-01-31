@@ -13,7 +13,8 @@ module.exports = Primo.DefineEntity(function(id, data) {
   this.attach(new RigidBody(this, {
     solid: false,
     gravity: 0.0,
-    bounce: 0.0
+    bounce: 0.0,
+    type: "circle"
   }))
 
   var bullet = this
