@@ -12,13 +12,15 @@ module.exports = Primo.DefineEntity(function(id, data) {
   this.width = 50
   this.height = 50
   this.gravible = true
+  this.name = powerup.name,
   this.attach(new Animation(this, powerup.texture))
   this.attach(new RigidBody(this, {
-      solid: false
+    solid: false,
+    type: "circle"
   }))
   this.on('collided', function(other) {
     if(other instanceof Defender) {
-      this.raise('powerup-collected', powerup.name)
+      this.raise('powerup-collected', this)
       powerup.invoke.call(this)
       this.kill()
     }

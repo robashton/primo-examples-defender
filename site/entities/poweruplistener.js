@@ -2,10 +2,20 @@ var Primo = require('primo')
 
 var Asteroid = require('./asteroid')
 var Powerup = require('./powerup')
+var FloatingText = require('./floatingtext')
 
 module.exports = Primo.DefineEntity(function(id, data) {
-  this.scene.on('asteroid-destroyed', function(asteroid) {
+  var scene = this.scene
+  scene.on('asteroid-destroyed', function(asteroid) {
     trySpawnPowerupFor(asteroid)
+  })
+  scene.on('powerup-collected', function(powerup) {
+    scene.spawnEntity(FloatingText, {
+      x: powerup.x,
+      y: powerup.y,
+      text: powerup.name,
+      time: 3
+    })
   })
 })
 
