@@ -10,7 +10,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
 })
 
 function trySpawnPowerupFor(asteroid) {
-  if(Math.random() < 0.2) 
+  if(Math.random() < 0.4) 
     spawnPowerupFor(asteroid)
 }
 

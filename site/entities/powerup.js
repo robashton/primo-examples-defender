@@ -2,6 +2,7 @@ var Primo = require('primo')
 var Animation = require('primo-animation')
 var RigidBody = require('primo-physics').RigidBody
 
+var Defender = require('./defender')
 var Planet = require('./planet')
 var DestructionField = require('./destructionfield')
 var EnergyFeeder = require('./energyfeeder')
@@ -16,16 +17,19 @@ module.exports = Primo.DefineEntity(function(id, data) {
       solid: false
   }))
   this.on('collided', function(other) {
-    if(other instanceof Planet) {
+    if(other instanceof Defender) {
+      this.raise('powerup-collected', powerup.name)
       powerup.invoke.call(this)
       this.kill()
     }
+    else if(other instanceof Planet)
+      this.kill()
   })
 })
 
 var powerups = [
   {
-    name: "energy-boost",
+    name: "Energy boost!",
     texture: 'media/star.png',
     invoke: function() {
       var defender = this.scene.findEntityById('defender')
@@ -33,7 +37,7 @@ var powerups = [
     }
   },
   {
-    name: "health-boost",
+    name: "Health boost!",
     texture: 'media/heart.png',
     invoke: function() {
       var planet = this.scene.findEntityById('planet')
@@ -41,7 +45,7 @@ var powerups = [
     }
   },
   {
-    name: "destruction-field",
+    name: "Destruction field!",
     texture: 'media/destruction.png',
     invoke: function() {
       var planet = this.scene.findEntityById('planet')
@@ -52,7 +56,7 @@ var powerups = [
     }
   },
   {
-    name: "infinite-energy",
+    name: "Energy regen!",
     texture: 'media/infinite.png',
     invoke: function() {
       this.scene.spawnEntity(EnergyFeeder)
