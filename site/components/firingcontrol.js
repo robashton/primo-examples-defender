@@ -39,6 +39,7 @@ FiringControl.prototype = {
     })
     this.firingTicks++
     this.modifyEnergy(-this.variables.firingConsumption)
+    this.entity.raise('fired')
   },
   modifyEnergy: function(amount) {
     this.energy += amount

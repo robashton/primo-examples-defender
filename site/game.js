@@ -4,6 +4,7 @@ var AsteroidSpawner = require('./entities/asteroidspawner')
 var ExplosionListener = require('./entities/explosionlistener')
 var ScoreKeeper = require('./entities/scorekeeper')
 var PowerupListener = require('./entities/poweruplistener')
+var Sounds = require('./entities/audio')
 var Hud = require('./entities/hud')
 var Eventable = require('primo-events')
 var _ = require('underscore')
@@ -43,6 +44,7 @@ TinyDefender.prototype = {
       , powerups = scene.spawnEntity(PowerupListener)
       , hud = scene.spawnEntity(Hud)
       , scores = scene.spawnEntity(ScoreKeeper)
+      , sounds = scene.spawnEntity(Sounds)
 
     engine.cellsize = 100
     camera.moveTo(0,0)
