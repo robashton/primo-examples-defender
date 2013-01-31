@@ -76,7 +76,7 @@ Menu.prototype = {
         colour: '#FFF'
     }))
   },
-  gameover: function() {
+  gameover: function(score) {
     this.engine.menu.show()
       .addOption(new ui.Label({
         text: "Play again",
@@ -96,7 +96,7 @@ Menu.prototype = {
         colour: '#FFF'
       }))
       .addDisplay(new ui.Label({
-        text: "Thanks for playing",
+        text: "You got a whopping " + score + " points before you let the earth get destroyed",
         x: 320,
         y: 110,
         align: 'center',

@@ -14,8 +14,7 @@ module.exports = Primo.DefineEntity(function(id, data) {
       x: powerup.x,
       y: powerup.y,
       text: powerup.name,
-      time: 3,
-      font: 
+      time: 3
     })
   })
 })

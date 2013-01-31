@@ -6,6 +6,7 @@ var ScoreKeeper = require('./entities/scorekeeper')
 var PowerupListener = require('./entities/poweruplistener')
 var Sounds = require('./entities/audio')
 var Hud = require('./entities/hud')
+var CameraZoom = require('./entities/camerazoom')
 var Eventable = require('primo-events')
 var _ = require('underscore')
 
@@ -18,6 +19,7 @@ var TinyDefender = function(engine) {
   this.engine.input.bind(engine.input.LEFT_CTRL, 'fire')
   this.engine.gravity = this.gravity 
   this.level = 0
+  this.score = 0
   this.asteroidsDestroyed = 0
 }
 
@@ -45,17 +47,21 @@ TinyDefender.prototype = {
       , hud = scene.spawnEntity(Hud)
       , scores = scene.spawnEntity(ScoreKeeper)
       , sounds = scene.spawnEntity(Sounds)
+      , cameraZoom = scene.spawnEntity(CameraZoom)
 
     engine.cellsize = 100
     camera.moveTo(0,0)
-    camera.zoomTo(2000)
     scene.on('player-died', this.onPlayerDied, this)
     scene.on('asteroid-destroyed', this.onAsteroidDestroyed, this)
+    scene.on('score-changed', this.onScoreChanged, this)
     this.changeLevel(1)
   },
   changeLevel: function(level) {
     this.level = level
     this.scene.raise('level-changed', level)
+  },
+  onScoreChanged: function(score) {
+    this.score = score
   },
   onAsteroidDestroyed: function() {
     this.asteroidsDestroyed++
@@ -66,7 +72,7 @@ TinyDefender.prototype = {
     var game = this
     setTimeout(function() {
       game.engine.ui.clear()
-      game.raise('game-over')
+      game.raise('game-over', game.score)
       game.engine.reset()
     }, 2000)
   },

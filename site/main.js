@@ -11,8 +11,8 @@ var engine = Primo.Create('game')
 var game = new TinyDefender(engine)
 var menu = new TinyDefenderMenu(engine, game)
 
-game.on('game-over', function() {
-  menu.gameover()
+game.on('game-over', function(score) {
+  menu.gameover(score)
 })
 
 engine.on('init', function() {
